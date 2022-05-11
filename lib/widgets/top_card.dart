@@ -1,0 +1,132 @@
+import 'package:expense_tracker_ii/api/google_sheets_api.dart';
+import 'package:flutter/material.dart';
+
+class TopCard extends StatelessWidget {
+  final String balance;
+  final String income;
+  final String expense;
+
+  const TopCard({
+    required this.balance,
+    required this.expense,
+    required this.income,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(0.0),
+      child: Container(
+        height: 200,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text(
+                  'B A L A N C E (' +
+                      GoogleSheetsAPI.monthSelect(
+                          DateTime.now().month.toString()) +
+                      ")",
+                  style: TextStyle(color: Colors.grey[500], fontSize: 16)),
+              Text(
+                '\$' + balance,
+                style: TextStyle(color: Colors.grey[800], fontSize: 40),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Color(0xff379683),
+                          ),
+                          child: const Center(
+                            child: Icon(
+                              Icons.arrow_upward,
+                              color: Color(0xff05386b),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Income',
+                                style: TextStyle(color: Colors.grey[500])),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text('\$' + income,
+                                style: TextStyle(
+                                    color: Colors.grey[600],
+                                    fontWeight: FontWeight.bold)),
+                          ],
+                        )
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Color(0xff379683),
+                          ),
+                          child: const Center(
+                            child: Icon(
+                              Icons.arrow_downward,
+                              color: Color(0xff05386b),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Expense',
+                                style: TextStyle(color: Colors.grey[500])),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text('\$' + expense,
+                                style: TextStyle(
+                                    color: Colors.grey[600],
+                                    fontWeight: FontWeight.bold)),
+                          ],
+                        )
+                      ],
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            color: Color(0xffedf5e1),
+            boxShadow: [
+              BoxShadow(
+                  color: Color(0xff8ee4af),
+                  offset: const Offset(4.0, 4.0),
+                  blurRadius: 15.0,
+                  spreadRadius: 1.0),
+              const BoxShadow(
+                  color: Color(0xff8ee4af),
+                  offset: Offset(-4.0, -4.0),
+                  blurRadius: 15.0,
+                  spreadRadius: 1.0),
+            ]),
+      ),
+    );
+  }
+}
